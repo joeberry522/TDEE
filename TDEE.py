@@ -18,6 +18,8 @@ username = 'your_username_here'
 password = 'your_password_here'
 
 ##these are the date operators (year, month, day) format
+
+
 start_date = datetime.date(2021, 6, 1)
 end_date = datetime.date(2021, 9, 16)
 
@@ -28,7 +30,8 @@ end_date = datetime.date(2021, 9, 16)
 ## since date objects from the myfitnesspal only return one date 
 # at a time. Which is a super bummer.  
 
-
+##no I haven't gotten the end date to change dynamically yet. 
+# check back next week maybe
 ##script starts here
 
 client = myfitnesspal.Client(username, password)
