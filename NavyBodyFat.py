@@ -30,12 +30,18 @@ def body_fat(start_date, end_date):
     neck = pd.DataFrame(neck.values(), neck.keys())
     waist = waist.reset_index()
     neck = neck.reset_index()
+    waist['index'] = pd.to_datetime(waist['index'])
+    neck['index'] = pd.to_datetime(neck['index'])
     waist = waist.rename(columns={"index": "Date", 0: "Waist"})
     neck = neck.rename(columns={"index": "Date", 0: "Neck"})
     x = pd.merge(waist, neck, left_on=  ['Date'],
                    right_on= ['Date'], 
                    how = 'left')
     x['Body Fat %'] = round(BFP(x['Waist'], x['Neck'], height),1)
+    x['Date'] = pd.to_datetime(x['Date'])
+    x = x.sort_values(by=['Date'])
+    x = x.reset_index()
+    x = x.drop(columns = 'index')
     return x
 
 x = body_fat(start_date, end_date)
